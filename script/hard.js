@@ -7,20 +7,18 @@ const loader = document.getElementById("loader")
 //To Show Display The Score
 const short = document.getElementById("short")
   
-
 let currentQuestion = {};
 let selectAnswer = true;
 let score = 0;
 let questionCounter = 0;
 let availableQuestions = [];
-//let questions = [];
+let questions = [];
 
-fetch("https://opentdb.com/api.php?amount=20&category=9&difficulty=medium&type=multiple")
+fetch("https://opentdb.com/api.php?amount=40&type=multiple")
 .then(res=>{
     return res.json();
 })
 .then(Datas =>{
-    console.log(Datas.results)
    questions = Datas.results.map(data=>{
         const formattedQuestion = {
             question : data.question
@@ -34,49 +32,44 @@ fetch("https://opentdb.com/api.php?amount=20&category=9&difficulty=medium&type=m
     })
     return formattedQuestion
     })
+    game.classList.remove("hidden")
+    loader.classList.add("hidden")
     startGame()
 })
 .catch(err=>{
-    short.innerHTML = `<h1>Error!</h1><br><h2>Check Your Internet Inorder To Answer Questions Available.</h2>`
-    
+    alert("connect to your internet") 
     console.error(err)
 })
 
 
 const correct_bonus = 10;
-const max_question = 20;
+const max_question = 40;
 
 startGame = () =>{
     questionCounter = 0;
     score = 0;
     availableQuestions = [...questions]
-    console.log(availableQuestions)
-    game.classList.remove("hidden")
-  loader.classList.add("hidden")
-  getNewQuestion()
+    getNewQuestion()
 }
 
 getNewQuestion = () =>{
     if(availableQuestions.length === 0 || questionCounter === max_question){
-       getScore()
-        //
-         if(score < 50){
-             short.innerHTML =`<h1>Poor! Your Score is ${score}</h1>`
+       saveScore()
+        
+         if(score < 190){
+             short.innerHTML =`<h2>Your Score is ${score}</h2>`
             return setTimeout(()=>{
                return window.location.assign("/")
             },5000)
-        } else {  short.innerHTML=`<h1>Bravo! Your Score is ${score}</h1>`
+        } else {  short.innerHTML=`<h2>Bravo! Your Score is ${score}</h2>`
         return setTimeout(()=>{
             return window.location.assign("/")
         },5000)}       
-       //
-      
+       
     }
     
     questionCounter++
-
     questionCounterText.innerText = `${questionCounter}/ ${max_question} `
-
 
     const questionIndex = Math.floor(Math.random()*availableQuestions.length);
     currentQuestion = availableQuestions[questionIndex]
@@ -95,10 +88,10 @@ choices.forEach(choice =>{
         if(!selectAnswer) return;
 
         selectAnswer = false;
+
         const selectedChoice = e.target;
         const selectedAnswer = selectedChoice.dataset["number"]
-        console.log(selectedAnswer)
-     
+        
        const classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "incorrect" ;
 
     if(classToApply === "correct"){
@@ -112,7 +105,6 @@ choices.forEach(choice =>{
      },1000)
 
     })
-    
 })
 
 incrementScore = num =>{
@@ -122,7 +114,7 @@ incrementScore = num =>{
 
 const hHighScores = JSON.parse(localStorage.getItem("hHighScores")) || [];
 
-getScore = () =>{
+saveScore = () =>{
     let easyScore = {
         category : "Hard",
         score : score
@@ -132,4 +124,3 @@ getScore = () =>{
     hHighScores.splice(2)
     localStorage.setItem("hHighScores" , JSON.stringify(hHighScores))
 }
-

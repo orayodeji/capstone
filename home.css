@@ -88,6 +88,7 @@ h2{
     font-size: 4.2rem;
     margin-bottom: 4rem;
     font-weight: 700;
+    color: blue;
 }
 h3{
     font-size: 2.8rem;
@@ -148,7 +149,7 @@ body{
 }
 
 body.dark{
-    background: black;
+    background: rgb(13, 5, 58);
     transition: background 0.3s linear, color 0.3s linear;
 }
 
