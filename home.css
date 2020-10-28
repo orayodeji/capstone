@@ -1,5 +1,5 @@
 :root{
-    background-color: #ecf5ff;
+    background-color: white;
     font-size: 62.5%;
 }
 
@@ -8,7 +8,7 @@
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
-    color: #333;
+    color: #333; 
 }
 .top-box{
     border-bottom: 2px blue solid;
@@ -23,7 +23,6 @@
 .logo{
     height: 2rem; 
     width: 2rem;  
-  /*  animation: spin 2s linear 1s infinite; */
     animation: spin 10s linear infinite alternate-reverse none;
 }
 @keyframes spin{
@@ -34,6 +33,7 @@
         transform: rotate(360deg);
     }
 }
+
 #toggle{
     visibility: hidden;
 }
@@ -72,9 +72,6 @@
     box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 253, 0.5);
 }
 
-h1, h2, h3, h4{
-    margin-bottom: 1rem;
-}
 h1{
     font-size: 5.4rem;
     color: blue;
@@ -92,10 +89,9 @@ h2{
 }
 h3{
     font-size: 2.8rem;
-    font-weight: 900;
+    font-weight: 700;
     color: blue;
-    margin-bottom: 1rem;
-    
+    margin-bottom: 1.7rem;
 }
 
 .flex-column{
@@ -113,7 +109,7 @@ h3{
     width: 100%;
     font-size: 1.8rem;
     border: 0.1rem solid rgba(86, 186, 225, 0.25);
-    background-color: white;
+    background-color: #ecf5ff;
 }
 .choice-container:hover{
     cursor: pointer;
@@ -137,7 +133,9 @@ h3{
 }
 .hud-prefix{
     text-align: center;
-    font-size: 2rem;
+    font-size: 2.8rem;
+    font-weight: 500;
+   color: #56a5eb;
 }
 .fas{
     font-size: 2rem;
@@ -146,11 +144,13 @@ h3{
 }
 body{
     transition: background 0.3s linear, color 0.3s linear;
+    
 }
 
 body.dark{
     background: rgb(13, 5, 58);
     transition: background 0.3s linear, color 0.3s linear;
+    
 }
 
 #loader{
@@ -181,3 +181,4 @@ body.dark{
 .incorrect{
     background-color: red;
 }
+
